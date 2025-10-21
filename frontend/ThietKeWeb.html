@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DACA.VN - Dịch vụ thiết kế Website chuyên nghiệp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Hiện menu con khi hover */
+        nav .relative:hover .hidden {
+        display: block;
+        }
+
+        /* Làm mượt hiệu ứng dropdown */
+        #service-menu, #project-menu {
+        transition: all 0.25s ease-in-out;
+        opacity: 0;
+        transform: translateY(5px);
+        pointer-events: none;
+        }
+        nav .relative:hover #service-menu,
+        nav .relative:hover #project-menu {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+        }
+
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+            color: #333;
+        }
+        .header-bg {
+            background-color: #FFFFFF;
+        }
+        .text-primary-blue {
+            color: #1a73e8;
+        }
+        .bg-primary-blue {
+            background-color: #1a73e8;
+        }
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .nav-link:hover {
+            color: #E65613;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <header class="header-bg text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="text-3xl font-bold rounded-lg px-2 py-1 bg-white text-primary-blue">DACA</a>
+            <!-- Menu -->
+            <nav class="hidden md:flex flex-1 justify-center space-x-16 text-lg font-medium relative">
+
+                <!-- Dropdown Dịch vụ -->
+                <div class="relative group">
+                    <button
+                        class="flex items-center text-black hover:text-orange-500 transition-colors duration-300 focus:outline-none">
+                        Dịch vụ
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1 mt-[2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+
+            <!-- Menu con -->
+                    <div
+                        class="absolute left-0 top-full mt-2 w-64 bg-white rounded-xl shadow-lg py-2 opacity-0 invisible 
+                        group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out z-50">
+                        <a href="banhang.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Thiết kế Website Bán hàng</a>
+                        <a href="doanhnghiep.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Thiết kế Website Doanh nghiệp</a>
+                        <a href="yeucau.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Thiết kế Website theo yêu cầu</a>
+                    </div>
+                </div>
+
+                <!-- Dropdown Dự án -->
+                <div class="relative group">
+                    <button
+                        class="flex items-center text-black hover:text-orange-500 transition-colors duration-300 focus:outline-none">
+                        Dự án
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1 mt-[2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+
+                    <!-- Menu con -->
+                    <div
+                        class="absolute left-0 top-full mt-2 w-64 bg-white rounded-xl shadow-lg py-2 opacity-0 invisible 
+                        group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out z-50"
+                    >
+                        <a href="duan_banhang.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Dự án Website Bán hàng</a>
+                        <a href="duan_doanhnghiep.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Dự án Website Doanh nghiệp</a>
+                        <a href="duan_batdongsan.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Dự án Website Bất động sản</a>
+                    </div>
+                </div>
+
+                    <!-- Mục khác -->
+                    <a href="#about" class="nav-link transition-colors duration-300 text-black hover:text-orange-500">Về chúng tôi</a>
+                    <a href="#contact" class="nav-link transition-colors duration-300 text-black hover:text-orange-500">Liên hệ</a>
+            </nav>
+
+            <!-- Nút di động -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+
+    <main>
+        <section class="bg-gradient-to-r from-gray-100 to-gray-300 text-orange-600 py-20 rounded-b-3xl">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+                <!-- Text bên trái -->
+                <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0 md:pr-10">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-snug text-orange-500">
+                        Thiết kế website chuyên nghiệp, chuẩn SEO
+                    </h1><br>
+                    <div class="w-20 h-1 bg-orange-500 mx-auto md:mx-0 mb-6 rounded-full"></div>
+                    <p class="text-lg md:text-xl text-black mb-8 max-w-md mx-auto md:mx-0">
+                        Hơn <span class="font-bold text-black-600">38.000+</span> khách hàng đã hài lòng với dịch vụ của chúng tôi.
+                    </p>
+                    <a href="#contact" 
+                        class="bg-white text-blue-600 font-semibold py-3 px-8 rounded-full shadow-md 
+                        transition-all duration-300 transform hover:scale-110 hover:shadow-xl hover:bg-orange-600 hover:text-white">
+                        Tư vấn miễn phí
+                    </a>
+
+                </div>
+
+            <!-- Ảnh bên phải -->
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="image/Thietkewweb.jpeg" 
+                        alt="Thiết kế website" 
+                        class="rounded-2xl shadow-lg w-full max-w-md hover:scale-105 transition-transform duration-500">
+                </div>
+
+            </div>
+        </section>
+
+                <!-- PHẦN DỊCH VỤ -->
+        <section id="services" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold mb-4 text-gray-800">Dịch vụ của chúng tôi</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Giải pháp website toàn diện cho mọi nhu cầu kinh doanh</p>
+                    <div class="w-20 h-1 bg-orange-500 mx-auto mt-6 rounded-full"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Service Card 1 -->
+                    <div class="bg-white rounded-2xl p-8 text-center shadow-lg transition-all duration-300 border border-gray-100 
+                            hover:shadow-xl hover:-translate-y-2 hover:border-orange-300 group cursor-pointer">
+                        <div class="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center mb-6 mx-auto 
+                                transition-all duration-300 group-hover:scale-110 group-hover:bg-orange-600">
+                            <svg class="w-8 h-8 text-white transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800 transition-colors duration-300 group-hover:text-orange-500">
+                            Website Bán hàng
+                        </h3>
+                        <p class="text-gray-600 leading-relaxed transition-colors duration-300 group-hover:text-gray-700">
+                            Thiết kế website bán hàng chuyên nghiệp, tích hợp đầy đủ tính năng từ giỏ hàng đến thanh toán.
+                        </p>
+                    </div>
+
+                    <!-- Service Card 2 -->
+                    <div class="bg-white rounded-2xl p-8 text-center shadow-lg transition-all duration-300 border border-gray-100 
+                            hover:shadow-xl hover:-translate-y-2 hover:border-orange-300 group cursor-pointer">
+                        <div class="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center mb-6 mx-auto 
+                                transition-all duration-300 group-hover:scale-110 group-hover:bg-orange-600">
+                            <svg class="w-8 h-8 text-white transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800 transition-colors duration-300 group-hover:text-orange-500">
+                            Website Doanh nghiệp
+                        </h3>
+                        <p class="text-gray-600 leading-relaxed transition-colors duration-300 group-hover:text-gray-700">
+                            Xây dựng website chuyên nghiệp thể hiện đẳng cấp thương hiệu, thu hút khách hàng tiềm năng.
+                        </p>
+                    </div>
+
+                    <!-- Service Card 3 -->
+                    <div class="bg-white rounded-2xl p-8 text-center shadow-lg transition-all duration-300 border border-gray-100 
+                            hover:shadow-xl hover:-translate-y-2 hover:border-orange-300 group cursor-pointer">
+                        <div class="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center mb-6 mx-auto 
+                                transition-all duration-300 group-hover:scale-110 group-hover:bg-orange-600">
+                            <svg class="w-8 h-8 text-white transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800 transition-colors duration-300 group-hover:text-orange-500">
+                            Website theo yêu cầu
+                        </h3>
+                        <p class="text-gray-600 leading-relaxed transition-colors duration-300 group-hover:text-gray-700">
+                            Phát triển website độc quyền với tính năng tùy chỉnh, đáp ứng mọi yêu cầu đặc thù.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHẦN DỰ ÁN -->
+        <section id="projects" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold mb-4 text-gray-800">Dự án đã thực hiện</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Khám phá những dự án tiêu biểu của chúng tôi</p>
+                    <div class="w-20 h-1 bg-orange-500 mx-auto mt-6 rounded-full"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Project Card 1 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 
+                            hover:shadow-xl hover:-translate-y-2 group cursor-pointer">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                alt="Website thời trang" 
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2 transition-colors duration-300 group-hover:text-orange-500">
+                                Website thời trang
+                            </h3>
+                            <p class="text-gray-600 transition-colors duration-300 group-hover:text-gray-700">
+                                Thiết kế website thương mại điện tử với giao diện tối giản, hiện đại, tối ưu cho di động.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Card 2 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 
+                            hover:shadow-xl hover:-translate-y-2 group cursor-pointer">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                alt="Website doanh nghiệp" 
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2 transition-colors duration-300 group-hover:text-orange-500">
+                                Website xây dựng
+                            </h3>
+                            <p class="text-gray-600 transition-colors duration-300 group-hover:text-gray-700">
+                                Trang web giới thiệu năng lực, dự án và đội ngũ nhân sự của công ty xây dựng.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Card 3 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 
+                            hover:shadow-xl hover:-translate-y-2 group cursor-pointer">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                alt="Website bất động sản" 
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2 transition-colors duration-300 group-hover:text-orange-500">
+                                Website bất động sản
+                            </h3>
+                            <p class="text-gray-600 transition-colors duration-300 group-hover:text-gray-700">
+                                Nền tảng giúp khách hàng tìm kiếm và xem chi tiết các dự án bất động sản.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Về chúng tôi</h2>
+                <div class="max-w-4xl mx-auto text-center">
+                    <p class="text-lg md:text-xl text-gray-600 mb-6 leading-relaxed">
+                        Với hơn 10 năm kinh nghiệm trong lĩnh vực thiết kế website, chúng tôi tự hào là đối tác tin cậy của hàng nghìn doanh nghiệp lớn nhỏ. DACA.vn luôn cam kết mang đến những giải pháp công nghệ tối ưu, giúp khách hàng xây dựng thương hiệu và phát triển bền vững trên nền tảng số.
+                    </p>
+                    <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+                        Chúng tôi không chỉ tạo ra những trang web đẹp mắt, mà còn đảm bảo hiệu quả kinh doanh, tối ưu hóa trải nghiệm người dùng và chuẩn SEO ngay từ đầu.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-[#1D3557] text-white rounded-t-3xl">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12">Liên hệ với chúng tôi</h2>
+                <div class="max-w-2xl mx-auto bg-[#264F73] p-8 rounded-2xl shadow-xl">
+                    <form class="space-y-6">
+                        <!-- Họ và tên -->
+                        <div>
+                            <label for="name" class="block text-lg font-medium mb-2">Họ và tên</label>
+                            <input type="text" id="name" placeholder="Nguyễn Văn A"
+                                class="w-full p-3 rounded-lg text-[#1D3557] bg-white focus:outline-none focus:ring-2 focus:ring-[#F4A261] transition">
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-lg font-medium mb-2">Email</label>
+                            <input type="email" id="email" placeholder="email@example.com"
+                                class="w-full p-3 rounded-lg text-[#1D3557] bg-white focus:outline-none focus:ring-2 focus:ring-[#F4A261] transition">
+                        </div>
+
+                        <!-- Nội dung -->
+                        <div>
+                            <label for="message" class="block text-lg font-medium mb-2">Nội dung</label>
+                            <textarea id="message" rows="5" placeholder="Bạn cần tư vấn về dịch vụ nào?"
+                                    class="w-full p-3 rounded-lg text-[#1D3557] bg-white focus:outline-none focus:ring-2 focus:ring-[#F4A261] transition"></textarea>
+                        </div>
+
+                        <!-- Nút submit -->
+                        <button type="submit"
+                                class="w-full bg-[#E76F51] hover:bg-[#F4A261] text-white font-bold py-3 rounded-full shadow-lg transition-transform transform hover:scale-105 text-lg">
+                            Gửi yêu cầu tư vấn
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto text-center px-4">
+            <p>&copy; 2024 DACA.vn. Tất cả bản quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+   <script>
+        // --- Menu di động ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Ẩn menu di động khi click vào link
+        const navLinks = mobileMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+
+    <div class="fixed right-4 bottom-20 flex flex-col space-y-3 z-50">
+        <!-- Messenger -->
+        <a href="https://m.me/nguyen.hieu.31286" target="_blank"
+            class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
+            <img src="https://cdn-icons-png.flaticon.com/512/2504/2504903.png" alt="Messenger" class="w-7 h-7">
+        </a>
+
+        <!-- Zalo -->
+        <a href="https://zalo.me/0383402764" target="_blank"
+            class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="w-7 h-7">
+        </a>
+
+        <!-- Phone -->
+        <a href="tel:0383402764"
+            class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
+            <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Phone" class="w-6 h-6">
+        </a>
+    </div>
+    
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.querySelector("form");  // tự động tìm form đầu tiên
+  if (!form) return;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if (!name || !email) {
+      alert("Vui lòng nhập tên và email!");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("message", message);
+
+    try {
+      const res = await fetch("http://127.0.0.1:8000/contacts/", {
+        method: "POST",
+        body: formData
+      });
+
+      if (!res.ok) throw new Error("Gửi thất bại!");
+      alert("Gửi thành công! Cảm ơn bạn đã liên hệ ❤️");
+      form.reset();
+    } catch (err) {
+      alert(err.message);
+      console.error(err);
+    }
+  });
+});
+</script>
+
+</body>
+</html>
