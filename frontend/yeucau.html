@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Theo Yêu Cầu - DACA.vn</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FFFFFF;
+      color: #333;
+    }
+    .header-bg {
+      background-color: #FFFFFF;
+    }
+    .text-primary-blue {
+      color: #1a73e8;
+    }
+    .nav-link:hover {
+      color: #E65613;
+    }
+    
+    /* Hiện menu con khi hover */
+    nav .relative:hover .hidden {
+      display: block;
+    }
+
+    /* Làm mượt hiệu ứng dropdown */
+    #service-menu, #project-menu {
+      transition: all 0.25s ease-in-out;
+      opacity: 0;
+      transform: translateY(5px);
+      pointer-events: none;
+    }
+    nav .relative:hover #service-menu,
+    nav .relative:hover #project-menu {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .btn-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <!-- Header -->
+  <header class="header-bg text-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="text-3xl font-bold rounded-lg px-2 py-1 bg-white text-primary-blue">DACA</a>
+      <!-- Menu -->
+      <nav class="hidden md:flex flex-1 justify-center space-x-16 text-lg font-medium relative">
+
+        <!-- Dropdown Dịch vụ -->
+        <div class="relative group">
+          <button
+            class="flex items-center text-black hover:text-orange-500 transition-colors duration-300 focus:outline-none">
+            Dịch vụ
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1 mt-[2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <!-- Menu con -->
+          <div
+            class="absolute left-0 top-full mt-2 w-64 bg-white rounded-xl shadow-lg py-2 opacity-0 invisible 
+            group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out z-50">
+            <a href="banhang.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Thiết kế Website Bán hàng</a>
+            <a href="doanhnghiep.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Thiết kế Website Doanh nghiệp</a>
+            <a href="yeucau.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Thiết kế Website theo yêu cầu</a>
+          </div>
+        </div>
+
+        <!-- Dropdown Dự án -->
+        <div class="relative group">
+          <button
+            class="flex items-center text-black hover:text-orange-500 transition-colors duration-300 focus:outline-none">
+            Dự án
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1 mt-[2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <!-- Menu con -->
+          <div
+            class="absolute left-0 top-full mt-2 w-64 bg-white rounded-xl shadow-lg py-2 opacity-0 invisible 
+            group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out z-50"
+          >
+            <a href="duan_banhang.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Dự án Website Bán hàng</a>
+            <a href="duan_doanhnghiep.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Dự án Website Doanh nghiệp</a>
+            <a href="duan_batdongsan.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Dự án Website Bất động sản</a>
+          </div>
+        </div>
+
+        <!-- Mục khác -->
+        <a href="#about" class="nav-link transition-colors duration-300 text-black hover:text-orange-500">Về chúng tôi</a>
+        <a href="#contact" class="nav-link transition-colors duration-300 text-black hover:text-orange-500">Liên hệ</a>
+      </nav>
+
+      <!-- Nút di động -->
+      <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-orange-100 to-orange-300 py-20">
+    <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 text-center md:text-left">
+        <h1 class="text-4xl md:text-5xl font-bold text-orange-600 mb-4">Website Thiết Kế Theo Yêu Cầu</h1>
+        <p class="text-lg text-gray-700 mb-6">
+          Chúng tôi giúp bạn sở hữu một website được thiết kế riêng, tối ưu hóa cho thương hiệu, ngành nghề và khách hàng mục tiêu của bạn.
+        </p>
+        <a href="#contact"
+           class="bg-orange-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-500 transition-all btn-hover">
+          Nhận tư vấn miễn phí
+        </a>
+      </div>
+      <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
+        <img src="image/imagess1.jpeg"
+             alt="Thiết kế theo yêu cầu"
+             class="rounded-2xl shadow-lg w-full max-w-md hover:scale-105 transition-transform duration-500">
+      </div>
+    </div>
+  </section>
+
+  <!-- Nội dung chính -->
+  <section class="py-20 bg-white">
+  <div class="container mx-auto px-6 max-w-5xl">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">
+      Lý do nên chọn Website theo yêu cầu
+    </h2>
+    <div class="grid md:grid-cols-2 gap-10">
+      <div class="bg-gray-50 p-8 rounded-2xl shadow-md hover:shadow-2xl hover:scale-105 hover:bg-orange-50 hover:border hover:border-orange-400 transform transition-all duration-300 cursor-pointer">
+        <h3 class="text-2xl font-semibold text-orange-600 mb-4">1️⃣ Thiết kế độc quyền</h3>
+        <p class="text-gray-700 leading-relaxed">
+          Giao diện được xây dựng riêng biệt, phản ánh đúng phong cách thương hiệu và lĩnh vực kinh doanh của bạn.
+        </p>
+      </div>
+
+      <div class="bg-gray-50 p-8 rounded-2xl shadow-md hover:shadow-2xl hover:scale-105 hover:bg-orange-50 hover:border hover:border-orange-400 transform transition-all duration-300 cursor-pointer">
+        <h3 class="text-2xl font-semibold text-orange-600 mb-4">2️⃣ Tối ưu trải nghiệm người dùng</h3>
+        <p class="text-gray-700 leading-relaxed">
+          Mọi thao tác được thiết kế mượt mà, bố cục rõ ràng, giúp khách hàng dễ dàng tương tác và mua hàng.
+        </p>
+      </div>
+
+      <div class="bg-gray-50 p-8 rounded-2xl shadow-md hover:shadow-2xl hover:scale-105 hover:bg-orange-50 hover:border hover:border-orange-400 transform transition-all duration-300 cursor-pointer">
+        <h3 class="text-2xl font-semibold text-orange-600 mb-4">3️⃣ Chuẩn SEO & tốc độ cao</h3>
+        <p class="text-gray-700 leading-relaxed">
+          Website được tối ưu từ mã nguồn đến nội dung giúp tăng thứ hạng Google và tốc độ tải trang.
+        </p>
+      </div>
+
+      <div class="bg-gray-50 p-8 rounded-2xl shadow-md hover:shadow-2xl hover:scale-105 hover:bg-orange-50 hover:border hover:border-orange-400 transform transition-all duration-300 cursor-pointer">
+        <h3 class="text-2xl font-semibold text-orange-600 mb-4">4️⃣ Dễ dàng mở rộng</h3>
+        <p class="text-gray-700 leading-relaxed">
+          Có thể dễ dàng thêm tính năng mới như đặt hàng, thanh toán, chatbot hay blog theo nhu cầu phát triển.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Bảng giá (mẫu gợi ý) -->
+  <section class="py-20 bg-gray-100">
+  <div class="container mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Gói dịch vụ thiết kế theo yêu cầu</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      
+      <!-- Gói Cơ bản -->
+      <div class="bg-white rounded-2xl shadow-lg p-8 text-center transform transition-all duration-300 
+                  hover:shadow-2xl hover:scale-105 hover:bg-orange-50 hover:border hover:border-orange-400 cursor-pointer">
+        <h3 class="text-2xl font-semibold mb-4 text-orange-600">Cơ bản</h3>
+        <p class="text-gray-700 mb-4">Phù hợp doanh nghiệp nhỏ hoặc cá nhân</p>
+        <p class="text-3xl font-bold text-gray-900 mb-6">5.000.000đ</p>
+        <ul class="text-gray-600 space-y-2 mb-6">
+          <li>✔ Giao diện chuẩn SEO</li>
+          <li>✔ Tối ưu tốc độ tải</li>
+          <li>✔ Hỗ trợ 3 tháng</li>
+        </ul>
+        <a href="#contact" class="bg-orange-600 text-white px-6 py-2 rounded-full hover:bg-orange-500 transition">Liên hệ ngay</a>
+      </div>
+
+      <!-- Gói Nâng cao (gói nổi bật) -->
+      <div class="bg-white rounded-2xl shadow-lg p-8 text-center border-4 border-orange-500 transform scale-105 transition-all duration-300 
+                  hover:shadow-2xl hover:scale-110 hover:bg-orange-50 hover:border-orange-400 cursor-pointer">
+        <h3 class="text-2xl font-semibold mb-4 text-orange-600">Nâng cao</h3>
+        <p class="text-gray-700 mb-4">Phù hợp doanh nghiệp vừa và nhỏ</p>
+        <p class="text-3xl font-bold text-gray-900 mb-6">9.000.000đ</p>
+        <ul class="text-gray-600 space-y-2 mb-6">
+          <li>✔ Giao diện tùy chỉnh</li>
+          <li>✔ Chuẩn SEO nâng cao</li>
+          <li>✔ Tích hợp form liên hệ</li>
+          <li>✔ Hỗ trợ 6 tháng</li>
+        </ul>
+        <a href="#contact" class="bg-orange-600 text-white px-6 py-2 rounded-full hover:bg-orange-500 transition">Liên hệ ngay</a>
+      </div>
+
+      <!-- Gói Chuyên nghiệp -->
+      <div class="bg-white rounded-2xl shadow-lg p-8 text-center transform transition-all duration-300 
+                  hover:shadow-2xl hover:scale-105 hover:bg-orange-50 hover:border hover:border-orange-400 cursor-pointer">
+        <h3 class="text-2xl font-semibold mb-4 text-orange-600">Chuyên nghiệp</h3>
+        <p class="text-gray-700 mb-4">Dành cho doanh nghiệp lớn</p>
+        <p class="text-3xl font-bold text-gray-900 mb-6">Liên hệ báo giá</p>
+        <ul class="text-gray-600 space-y-2 mb-6">
+          <li>✔ Giao diện độc quyền</li>
+          <li>✔ Tính năng nâng cao</li>
+          <li>✔ Tối ưu SEO & tốc độ</li>
+          <li>✔ Bảo hành 12 tháng</li>
+        </ul>
+        <a href="#contact" class="bg-orange-600 text-white px-6 py-2 rounded-full hover:bg-orange-500 transition">Liên hệ ngay</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 bg-[#1D3557] text-white rounded-t-3xl">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12">Liên hệ tư vấn</h2>
+      <div class="max-w-2xl mx-auto bg-[#264F73] p-8 rounded-2xl shadow-xl">
+        <form class="space-y-6">
+          <div>
+            <label for="name" class="block text-lg mb-2">Họ và tên</label>
+            <input type="text" id="name" placeholder="Nguyễn Văn A"
+              class="w-full p-3 rounded-lg text-[#1D3557] bg-white focus:outline-none focus:ring-2 focus:ring-[#F4A261]">
+          </div>
+          <div>
+            <label for="email" class="block text-lg mb-2">Email</label>
+            <input type="email" id="email" placeholder="email@example.com"
+              class="w-full p-3 rounded-lg text-[#1D3557] bg-white focus:outline-none focus:ring-2 focus:ring-[#F4A261]">
+          </div>
+          <div>
+            <label for="message" class="block text-lg mb-2">Nội dung</label>
+            <textarea id="message" rows="5" placeholder="Bạn cần tư vấn gói thiết kế theo yêu cầu..."
+              class="w-full p-3 rounded-lg text-[#1D3557] bg-white focus:outline-none focus:ring-2 focus:ring-[#F4A261]"></textarea>
+          </div>
+          <button type="submit"
+                  class="w-full bg-[#E76F51] hover:bg-[#F4A261] text-white font-bold py-3 rounded-full shadow-lg transition-transform transform hover:scale-105 text-lg">
+            Gửi yêu cầu tư vấn
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-gray-800 text-white py-8 text-center">
+    <p>&copy; 2024 DACA.vn - Thiết kế website theo yêu cầu. Mọi quyền được bảo lưu.</p>
+  </footer>
+
+  <div class="fixed right-4 bottom-20 flex flex-col space-y-3 z-50">
+    <!-- Messenger -->
+    <a href="https://m.me/nguyen.hieu.31286" target="_blank"
+        class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
+        <img src="https://cdn-icons-png.flaticon.com/512/2504/2504903.png" alt="Messenger" class="w-7 h-7">
+    </a>
+
+    <!-- Zalo -->
+    <a href="https://zalo.me/0383402764" target="_blank"
+        class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="w-7 h-7">
+    </a>
+
+    <!-- Phone -->
+    <a href="tel:0383402764"
+        class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
+        <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Phone" class="w-6 h-6">
+    </a>
+  </div>
+
+  <script>
+    // --- Menu di động ---
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Ẩn menu di động khi click vào link
+    const navLinks = mobileMenu.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+  </script>
+</body>
+</html>

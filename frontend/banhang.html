@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thiết kế Website Bán hàng</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Header Styles */
+    .header-bg {
+      background-color: #FFFFFF;
+    }
+    .text-primary-blue {
+      color: #1a73e8;
+    }
+    .nav-link:hover {
+      color: #E65613;
+    }
+    
+    /* Hiện menu con khi hover */
+    nav .relative:hover .hidden {
+      display: block;
+    }
+
+    /* Làm mượt hiệu ứng dropdown */
+    #service-menu, #project-menu {
+      transition: all 0.25s ease-in-out;
+      opacity: 0;
+      transform: translateY(5px);
+      pointer-events: none;
+    }
+    nav .relative:hover #service-menu,
+    nav .relative:hover #project-menu {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Card Styles */
+    .card-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 1rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        max-width: 280px;
+        margin: 0 auto;
+        background: white;
+        border: 1px solid #f1f5f9;
+    }
+    .card-container:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(251, 146, 60, 0.15);
+        border-color: #fed7aa;
+    }
+
+    .card-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(251, 146, 60, 0.1) 0%, rgba(234, 88, 12, 0.05) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.3s ease;
+      padding: 1.5rem;
+    }
+    .card-container:hover .card-overlay {
+      opacity: 1;
+    }
+
+    .card-button, .demo-button {
+      padding: 0.6rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transform: scale(0.9);
+      transition: all 0.3s ease;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      width: 140px;
+      text-align: center;
+    }
+    .card-container:hover .card-button,
+    .card-container:hover .demo-button {
+      transform: scale(1);
+    }
+
+    .card-button {
+      background-color: #ea580c;
+      color: white;
+      border: none;
+    }
+    .card-button:hover {
+      background-color: #c2410c;
+    }
+
+    .demo-button {
+      background-color: white;
+      color: #ea580c;
+      border: 1px solid #ea580c;
+    }
+    .demo-button:hover {
+      background-color: #fff7ed;
+    }
+
+    .card-img {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        object-position: center;
+        transition: all 0.4s ease;
+        filter: brightness(0.95);
+    }
+    .card-container:hover .card-img {
+      filter: brightness(1);
+      transform: scale(1.05);
+    }
+
+    .card-title {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #374151;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .group:hover .card-title {
+      color: #ea580c;
+    }
+
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 1rem;
+    }
+
+    .section-title {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 3rem;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: #ea580c;
+      border-radius: 2px;
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #ea580c;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      transform: translateY(-10px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .card-container:hover .card-badge {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+<!-- Header từ bài trước -->
+<header class="header-bg text-white shadow-md sticky top-0 z-50">
+  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#" class="text-3xl font-bold rounded-lg px-2 py-1 bg-white text-primary-blue">DACA</a>
+    <!-- Menu -->
+    <nav class="hidden md:flex flex-1 justify-center space-x-16 text-lg font-medium relative">
+
+      <!-- Dropdown Dịch vụ -->
+      <div class="relative group">
+        <button
+          class="flex items-center text-black hover:text-orange-500 transition-colors duration-300 focus:outline-none">
+          Dịch vụ
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1 mt-[2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        <!-- Menu con -->
+        <div
+          class="absolute left-0 top-full mt-2 w-64 bg-white rounded-xl shadow-lg py-2 opacity-0 invisible 
+          group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out z-50">
+          <a href="banhang.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Thiết kế Website Bán hàng</a>
+          <a href="doanhnghiep.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Thiết kế Website Doanh nghiệp</a>
+          <a href="yeucau.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Thiết kế Website theo yêu cầu</a>
+        </div>
+      </div>
+
+      <!-- Dropdown Dự án -->
+      <div class="relative group">
+        <button
+          class="flex items-center text-black hover:text-orange-500 transition-colors duration-300 focus:outline-none">
+          Dự án
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1 mt-[2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        <!-- Menu con -->
+        <div
+          class="absolute left-0 top-full mt-2 w-64 bg-white rounded-xl shadow-lg py-2 opacity-0 invisible 
+          group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out z-50"
+        >
+          <a href="duan_banhang.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Dự án Website Bán hàng</a>
+          <a href="duan_doanhnghiep.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Dự án Website Doanh nghiệp</a>
+          <a href="duan_batdongsan.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Dự án Website Bất động sản</a>
+        </div>
+      </div>
+
+      <!-- Mục khác -->
+      <a href="#about" class="nav-link transition-colors duration-300 text-black hover:text-orange-500">Về chúng tôi</a>
+      <a href="#contact" class="nav-link transition-colors duration-300 text-black hover:text-orange-500">Liên hệ</a>
+    </nav>
+
+    <!-- Nút di động -->
+    <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4" />
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Main Content -->
+<section class="py-16">
+  <div class="container mx-auto px-4">
+
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 section-title">
+        Mẫu thiết kế website bán hàng
+      </h2>
+      <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">
+        Template website đẹp, tối ưu cho mọi thiết bị
+      </p>
+    </div>
+
+    <div class="grid-cards">
+      
+      <!-- Card 1 -->
+      <div class="text-center group">
+        <div class="card-container">
+          <div class="card-badge">Mới</div>
+          <img src="image/image1.jpeg" alt="Techno 04" class="card-img">
+          <div class="card-overlay">
+            <button class="demo-button">Xem Demo</button>
+            <button class="card-button">Chi Tiết</button>
+          </div>
+        </div>
+        <h3 class="card-title">Techno 04</h3>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="text-center group">
+        <div class="card-container">
+          <div class="card-badge">Phổ biến</div>
+          <img src="image/image2.jpeg" alt="Techno 03" class="card-img">
+          <div class="card-overlay">
+            <button class="demo-button">Xem Demo</button>
+            <button class="card-button">Chi Tiết</button>
+          </div>
+        </div>
+        <h3 class="card-title">Techno 03</h3>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="text-center group">
+        <div class="card-container">
+          <img src="image/image3.jpeg" alt="Techno 02" class="card-img">
+          <div class="card-overlay">
+            <button class="demo-button">Xem Demo</button>
+            <button class="card-button">Chi Tiết</button>
+          </div>
+        </div>
+        <h3 class="card-title">Techno 02</h3>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="text-center group">
+        <div class="card-container">
+          <img src="image/image4.jpeg" alt="Techmax 06" class="card-img">
+          <div class="card-overlay">
+            <button class="demo-button">Xem Demo</button>
+            <button class="card-button">Chi Tiết</button>
+          </div>
+        </div>
+        <h3 class="card-title">Techmax 06</h3>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="text-center group">
+        <div class="card-container">
+          <div class="card-badge">Bán chạy</div>
+          <img src="image/image5.jpeg" alt="Techmax 06" class="card-img">
+          <div class="card-overlay">
+            <button class="demo-button">Xem Demo</button>
+            <button class="card-button">Chi Tiết</button>
+          </div>
+        </div>
+        <h3 class="card-title">Techmax 06</h3>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="text-center group">
+        <div class="card-container">
+          <img src="image/image6.jpeg" alt="Techmax 06" class="card-img">
+          <div class="card-overlay">
+            <button class="demo-button">Xem Demo</button>
+            <button class="card-button">Chi Tiết</button>
+          </div>
+        </div>
+        <h3 class="card-title">Techmax 06</h3>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="text-center group">
+        <div class="card-container">
+          <img src="image/image7.jpeg" alt="Techmax 06" class="card-img">
+          <div class="card-overlay">
+            <button class="demo-button">Xem Demo</button>
+            <button class="card-button">Chi Tiết</button>
+          </div>
+        </div>
+        <h3 class="card-title">Techmax 06</h3>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="text-center group">
+        <div class="card-container">
+          <div class="card-badge">Mới</div>
+          <img src="image/image8.jpeg" alt="Techmax 06" class="card-img">
+          <div class="card-overlay">
+            <button class="demo-button">Xem Demo</button>
+            <button class="card-button">Chi Tiết</button>
+          </div>
+        </div>
+        <h3 class="card-title">Techmax 06</h3>
+      </div>
+
+      <!-- Card 9 -->
+      <div class="text-center group">
+        <div class="card-container">
+          <img src="image/image9.jpeg" alt="Techmax 06" class="card-img">
+          <div class="card-overlay">
+            <button class="demo-button">Xem Demo</button>
+            <button class="card-button">Chi Tiết</button>
+          </div>
+        </div>
+        <h3 class="card-title">Techmax 06</h3>
+      </div>
+
+      <!-- Card 10 -->
+      <div class="text-center group">
+        <div class="card-container">
+          <div class="card-badge">Phổ biến</div>
+          <img src="image/image10.jpeg" alt="Techmax 06" class="card-img">
+          <div class="card-overlay">
+            <button class="demo-button">Xem Demo</button>
+            <button class="card-button">Chi Tiết</button>
+          </div>
+        </div>
+        <h3 class="card-title">Techmax 06</h3>
+      </div>
+
+      <!-- Card 11 -->
+      <div class="text-center group">
+        <div class="card-container">
+          <img src="image/image11.jpeg" alt="Techmax 06" class="card-img">
+          <div class="card-overlay">
+            <button class="demo-button">Xem Demo</button>
+            <button class="card-button">Chi Tiết</button>
+          </div>
+        </div>
+        <h3 class="card-title">Techmax 06</h3>
+      </div>
+
+      <!-- Card 12 -->
+      <div class="text-center group">
+        <div class="card-container">
+          <img src="image/image12.jpeg" alt="Techmax 06" class="card-img">
+          <div class="card-overlay">
+            <button class="demo-button">Xem Demo</button>
+            <button class="card-button">Chi Tiết</button>
+          </div>
+        </div>
+        <h3 class="card-title">Techmax 06</h3>
+      </div>
+
+      <!-- Card 13 -->
+      <div class="text-center group">
+        <div class="card-container">
+          <div class="card-badge">Bán chạy</div>
+          <img src="image/image13.jpeg" alt="Techmax 06" class="card-img">
+          <div class="card-overlay">
+            <button class="demo-button">Xem Demo</button>
+            <button class="card-button">Chi Tiết</button>
+          </div>
+        </div>
+        <h3 class="card-title">Techmax 06</h3>
+      </div>
+
+      <!-- Card 14 -->
+      <div class="text-center group">
+        <div class="card-container">
+          <img src="image/image14.jpeg" alt="Techmax 06" class="card-img">
+          <div class="card-overlay">
+            <button class="demo-button">Xem Demo</button>
+            <button class="card-button">Chi Tiết</button>
+          </div>
+        </div>
+        <h3 class="card-title">Techmax 06</h3>
+      </div>
+
+      <!-- Card 15 -->
+      <div class="text-center group">
+        <div class="card-container">
+          <img src="image/image15.jpeg" alt="Techmax 06" class="card-img">
+          <div class="card-overlay">
+            <button class="demo-button">Xem Demo</button>
+            <button class="card-button">Chi Tiết</button>
+          </div>
+        </div>
+        <h3 class="card-title">Techmax 06</h3>
+      </div>
+
+      <!-- Card 16 -->
+      <div class="text-center group">
+        <div class="card-container">
+          <div class="card-badge">Mới</div>
+          <img src="image/image16.jpeg" alt="Techmax 06" class="card-img">
+          <div class="card-overlay">
+            <button class="demo-button">Xem Demo</button>
+            <button class="card-button">Chi Tiết</button>
+          </div>
+        </div>
+        <h3 class="card-title">Techmax 06</h3>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<div class="fixed right-4 bottom-20 flex flex-col space-y-3 z-50">
+  <a href="https://m.me/nguyen.hieu.31286" target="_blank"
+      class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
+      <img src="https://cdn-icons-png.flaticon.com/512/2504/2504903.png" alt="Messenger" class="w-7 h-7">
+  </a>
+
+  <a href="https://zalo.me/0383402764" target="_blank"
+      class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="w-7 h-7">
+  </a>
+
+  <a href="tel:0383402764"
+      class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
+      <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Phone" class="w-6 h-6">
+  </a>
+</div>
+
+<script>
+  // --- Menu di động ---
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Ẩn menu di động khi click vào link
+  const navLinks = mobileMenu.querySelectorAll('a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+  });
+</script>
+
+</body>
+</html>
