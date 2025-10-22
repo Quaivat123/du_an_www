@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dự án Bán hàng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Giữ lại CSS cũ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header.page-header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            padding: 50px 0;
+            text-align: center;
+            color: #fff;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.85;
+        }
+
+        .projects {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2rem;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background:  #3498db;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .project-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .project-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .project-list {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .project-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid  #3498db;
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #000000;
+        }
+
+        .project-description {
+            color: #040404;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .project-link {
+            display: inline-block;
+            color: #fff;
+            background:  #3498db;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .project-link:hover {
+            background: #6a11cb;
+        }
+
+        footer {
+            background: #fff;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #eee;
+            margin-top: 60px;
+            color: #7f8c8d;
+        }
+
+        .contact-info {
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+
+        /* CSS cho các icon liên hệ */
+        .contact-icons {
+            position: fixed;
+            right: 20px;
+            bottom: 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 100;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+            text-decoration: none;
+            overflow: hidden;
+        }
+
+        .contact-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .contact-icon img {
+            width: 50%;
+            height: 50%;
+            object-fit: cover;
+        }
+
+        .messenger {
+            background-color: #0084ff;
+        }
+
+        .zalo {
+            background-color: #0068ff;
+        }
+
+        .phone {
+            background-color: #25d366;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER NAVIGATION -->
+    <header class="bg-white text-black shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="text-3xl font-bold rounded-lg px-2 py-1 bg-white text-blue-700">DACA</a>
+            <!-- Menu desktop -->
+            <nav class="hidden md:flex flex-1 justify-center space-x-16 text-lg font-medium relative">
+
+                <!-- Dropdown Dịch vụ -->
+                <div class="relative group">
+                    <button class="flex items-center text-black hover:text-orange-500 transition-colors duration-300 focus:outline-none">
+                        Dịch vụ
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1 mt-[2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="absolute left-0 top-full mt-2 w-64 bg-white rounded-xl shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out z-50">
+                        <a href="banhang.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Thiết kế Website Bán hàng</a>
+                        <a href="doanhnghiep.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Thiết kế Website Doanh nghiệp</a>
+                        <a href="yeucau.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Thiết kế Website theo yêu cầu</a>
+                    </div>
+                </div>
+
+                <!-- Dropdown Dự án -->
+                <div class="relative group">
+                    <button class="flex items-center text-black hover:text-orange-500 transition-colors duration-300 focus:outline-none">
+                        Dự án
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1 mt-[2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="absolute left-0 top-full mt-2 w-64 bg-white rounded-xl shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out z-50">
+                        <a href="duan_banhang.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Dự án Website Bán hàng</a>
+                        <a href="duan_doanhnghiep.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Dự án Website Doanh nghiệp</a>
+                        <a href="duan_batdongsan.html" class="block px-5 py-3 text-gray-800 hover:bg-orange-50 hover:text-orange-600">Dự án Website Bất động sản</a>
+                    </div>
+                </div>
+
+                <a href="#about" class="nav-link transition-colors duration-300 text-black hover:text-orange-500">Về chúng tôi</a>
+                <a href="#contact" class="nav-link transition-colors duration-300 text-black hover:text-orange-500">Liên hệ</a>
+            </nav>
+
+            <!-- Nút menu mobile -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Menu di động -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#2c3e50]">
+            <a href="banhang.html" class="block px-5 py-3 text-white hover:bg-orange-600">Thiết kế Website Bán hàng</a>
+            <a href="doanhnghiep.html" class="block px-5 py-3 text-white hover:bg-orange-600">Thiết kế Website Doanh nghiệp</a>
+            <a href="yeucau.html" class="block px-5 py-3 text-white hover:bg-orange-600">Thiết kế Website theo yêu cầu</a>
+            <a href="#about" class="block px-5 py-3 text-white hover:bg-orange-600">Về chúng tôi</a>
+            <a href="#contact" class="block px-5 py-3 text-white hover:bg-orange-600">Liên hệ</a>
+        </div>
+    </header>
+
+    <!-- HEADER CỦA TRANG DỰ ÁN -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="text-3xl">Dự án Doanh nghiệp</h1>
+            <p class="subtitle">Các dự án tư vấn và giải pháp doanh nghiệp đã thực hiện</p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+        <section class="projects">
+            <h2 class="section-title">Dự án đã thực hiện</h2>
+
+            <div class="project-list">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnVzaW5lc3MlMjBtZWV0aW5nfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Hệ thống Quản lý Doanh nghiệp" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Hệ thống Quản lý Doanh nghiệp</h3>
+                        <p class="project-description">
+                            Triển khai hệ thống ERP cho tập đoàn sản xuất với 5.000 nhân viên, tối ưu hóa quy trình và tiết kiệm 30% chi phí vận hành.
+                        </p>
+                        <a href="#" class="project-link">Xem chi tiết</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGF0YSUyMGFuYWx5dGljc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Phân tích Dữ liệu Kinh doanh" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Phân tích Dữ liệu Kinh doanh</h3>
+                        <p class="project-description">
+                            Xây dựng hệ thống phân tích dữ liệu cho chuỗi bán lẻ, giúp tăng 25% doanh thu thông qua các chiến lược marketing dựa trên dữ liệu.
+                        </p>
+                        <a href="#" class="project-link">Xem chi tiết</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2Vic2l0ZSUyMGRldmVsb3BtZW50fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Website Doanh nghiệp" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Website Doanh nghiệp</h3>
+                        <p class="project-description">
+                            Thiết kế và phát triển website chuyên nghiệp cho công ty tài chính, tăng 40% lượng khách hàng tiềm năng và cải thiện trải nghiệm người dùng.
+                        </p>
+                        <a href="#" class="project-link">Xem chi tiết</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwYXBwfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Ứng dụng Di động" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Ứng dụng Di động</h3>
+                        <p class="project-description">
+                            Phát triển ứng dụng di động cho ngân hàng, cung cấp trải nghiệm người dùng tối ưu và tăng 60% giao dịch trực tuyến.
+                        </p>
+                        <a href="#" class="project-link">Xem chi tiết</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnVzaW5lc3MlMjBwcm9jZXNzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Tối ưu Quy trình" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Tối ưu Quy trình</h3>
+                        <p class="project-description">
+                            Tái cấu trúc và tối ưu hóa quy trình sản xuất cho nhà máy, giảm 20% thời gian sản xuất và tăng 15% năng suất.
+                        </p>
+                        <a href="#" class="project-link">Xem chi tiết</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xvdWQlMjBtaWdyYXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Chuyển đổi Đám mây" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Chuyển đổi Đám mây</h3>
+                        <p class="project-description">
+                            Di chuyển hệ thống IT của doanh nghiệp lên đám mây, giảm 35% chi phí vận hành và tăng tính linh hoạt cho doanh nghiệp.
+                        </p>
+                        <a href="#" class="project-link">Xem chi tiết</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Icon liên hệ -->
+        <div class="contact-icons">
+            <a href="https://m.me/nguyen.hieu.31286" target="_blank" class="contact-icon messenger">
+                <img src="https://cdn-icons-png.flaticon.com/512/2504/2504903.png" alt="Messenger">
+            </a>
+            <a href="https://zalo.me/0383402764" target="_blank" class="contact-icon zalo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo">
+            </a>
+            <a href="tel:0383402764" class="contact-icon phone">
+                <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Phone">
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 - Portfolio Dự án Bán hàng</p>
+            <div class="contact-info">
+                <p>Email: contact@example.com | Điện thoại: 0123 456 789</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script toggle menu -->
+    <script>
+        document.getElementById("mobile-menu-button").addEventListener("click", function () {
+            document.getElementById("mobile-menu").classList.toggle("hidden");
+        });
+    </script>
+</body>
+</html>

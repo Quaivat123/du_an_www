@@ -2,13 +2,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import Base, engine
-from app.api import users
+from app.api import users, products  # ✅ import cả users và products
+app = FastAPI(title="Du_An_WWW Backend")
+app.include_router(users.router, prefix="/contacts", tags=["Contacts"])
+app.include_router(products.router, prefix="/products", tags=["Products"])  # ✅ thêm dòng này
 
 # ⚙️ Tạo bảng trong database nếu chưa có
 Base.metadata.create_all(bind=engine)
 
-# 🚀 Khởi tạo ứng dụng FastAPI
-app = FastAPI(title="Du_An_WWW Backend")
 
 # 🧩 Bật CORS — Cho phép FE gọi API từ domain khác
 app.add_middleware(
@@ -21,6 +22,7 @@ app.add_middleware(
 
 # 📦 Import và đăng ký router (điểm API)
 app.include_router(users.router, prefix="/contacts", tags=["Contacts"])
+app.include_router(products.router, prefix="/products", tags=["Products"])  # ✅ thêm dòng này
 
 # ✅ Route test — kiểm tra server hoạt động
 @app.get("/")

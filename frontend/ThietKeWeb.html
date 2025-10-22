@@ -382,10 +382,9 @@
             <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Phone" class="w-6 h-6">
         </a>
     </div>
-    
-<script>
+  <script>
 document.addEventListener("DOMContentLoaded", function() {
-  const form = document.querySelector("form");  // tự động tìm form đầu tiên
+  const form = document.querySelector("form");  // Tìm form đầu tiên trong trang
   if (!form) return;
 
   form.addEventListener("submit", async (e) => {
@@ -395,31 +394,66 @@ document.addEventListener("DOMContentLoaded", function() {
     const email = document.getElementById("email").value.trim();
     const message = document.getElementById("message").value.trim();
 
-    if (!name || !email) {
-      alert("Vui lòng nhập tên và email!");
+    if (!name || !email || !message) {
+      alert("Vui lòng nhập đầy đủ thông tin!");
       return;
     }
-
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("message", message);
 
     try {
       const res = await fetch("http://127.0.0.1:8000/contacts/", {
         method: "POST",
-        body: formData
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message })  // ✅ gửi đúng JSON format
       });
 
       if (!res.ok) throw new Error("Gửi thất bại!");
-      alert("Gửi thành công! Cảm ơn bạn đã liên hệ ❤️");
+      alert("✅ Gửi thành công! Cảm ơn bạn đã liên hệ ❤️");
       form.reset();
     } catch (err) {
-      alert(err.message);
+      alert("❌ Lỗi: " + err.message);
       console.error(err);
     }
   });
 });
+</script>
+
+<script>
+async function loadProducts() {
+  try {
+    const res = await fetch("http://127.0.0.1:8000/products/");
+    const products = await res.json();
+
+    const container = document.querySelector("#projects .grid");
+    container.innerHTML = "";
+
+    if (!products.length) {
+      container.innerHTML = `<p class="text-center text-gray-500 col-span-3">Chưa có dự án nào</p>`;
+      return;
+    }
+
+    products.forEach(p => {
+      const card = `
+        <div class="bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2 group cursor-pointer">
+          <div class="h-48 overflow-hidden relative">
+            <img src="${p.image_url || 'https://via.placeholder.com/800x400'}"
+                 alt="${p.title}"
+                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-2 transition-colors duration-300 group-hover:text-orange-500">${p.title}</h3>
+            <p class="text-gray-600 transition-colors duration-300 group-hover:text-gray-700">${p.short_desc || ''}</p>
+          </div>
+        </div>
+      `;
+      container.innerHTML += card;
+    });
+  } catch (err) {
+    console.error("Lỗi khi tải sản phẩm:", err);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", loadProducts);
 </script>
 
 </body>
