@@ -1,30 +1,43 @@
 # backend/main.py
+# backend/main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.database import Base, engine
-from app.api import users, products  # ✅ import cả users và products
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from pathlib import Path
+
+from backend.backend_app import database
+from backend.backend_app.database import init_db
+from backend.backend_app.api import users
+
+
+# Đường dẫn tới project root
+BASE_DIR = Path(__file__).resolve().parent.parent
+STATIC_DIR = BASE_DIR / "frontend"
+
 app = FastAPI(title="Du_An_WWW Backend")
-app.include_router(users.router, prefix="/contacts", tags=["Contacts"])
-app.include_router(products.router, prefix="/products", tags=["Products"])  # ✅ thêm dòng này
 
-# ⚙️ Tạo bảng trong database nếu chưa có
-Base.metadata.create_all(bind=engine)
+# Đăng ký router
+app.include_router(users.router)
 
+# Khởi tạo database
+@app.on_event("startup")
+async def startup_event():
+    await init_db()
 
-# 🧩 Bật CORS — Cho phép FE gọi API từ domain khác
+# Middleware CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # "*" = cho phép tất cả; khi deploy thực tế nên giới hạn
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Cho phép mọi phương thức: GET, POST, PUT, DELETE
-    allow_headers=["*"],  # Cho phép mọi header
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# 📦 Import và đăng ký router (điểm API)
-app.include_router(users.router, prefix="/contacts", tags=["Contacts"])
-app.include_router(products.router, prefix="/products", tags=["Products"])  # ✅ thêm dòng này
+# Mount static files
+app.mount("/frontend", StaticFiles(directory=STATIC_DIR, html=True), name="frontend")
 
-# ✅ Route test — kiểm tra server hoạt động
+# Route gốc
 @app.get("/")
-def root():
-    return {"message": "Du_An_WWW backend is running 🚀"}
+async def serve_index():
+    return FileResponse(STATIC_DIR / "ThietKeWeb.html")
