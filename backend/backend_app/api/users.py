@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from backend.backend_app import database
 from backend.backend_app.schemas.user_schema import ContactCreate, ContactOut

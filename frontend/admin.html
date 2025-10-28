@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DACA.VN - Trang Quản trị Liên hệ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+        .header-bg {
+            background-color: #FFFFFF;
+        }
+        .text-primary-blue {
+            color: #1a73e8;
+        }
+        .btn-orange {
+            background-color: #E65613;
+        }
+        .btn-orange:hover {
+            background-color: #f97316;
+        }
+        .table-header-bg {
+            background-color: #1a73e8;
+        }
+        #contacts-table th, #contacts-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: left;
+        }
+        #contacts-table th {
+            font-weight: 600;
+            color: #ffffff;
+            background-color: #1a73e8;
+        }
+        #contacts-table tbody tr:hover {
+            background-color: #fef3c7;
+        }
+        /* Used in admin_table.js for delete button */
+        .btn-delete {
+            background-color: #ef4444;
+        }
+        .btn-delete:hover {
+            background-color: #dc2626;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+    <header class="header-bg text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="/" class="text-3xl font-bold rounded-lg px-2 py-1 bg-white text-primary-blue">DACA</a>
+            <h1 class="text-2xl font-semibold text-gray-800 hidden md:block">Trang Quản trị Liên hệ</h1>
+            <a href="/" class="text-lg font-medium text-black hover:text-orange-500 transition-colors duration-300">
+                Trang chủ
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-10">
+        <div id="login-container" class="max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+            <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Đăng nhập Admin</h2>
+            <form id="login-form" class="space-y-5">
+                <div>
+                    <label for="username" class="sr-only">Tên đăng nhập</label>
+                    <input type="text" id="username" placeholder="Tên đăng nhập" required
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-blue transition">
+                </div>
+                <div>
+                    <label for="password" class="sr-only">Mật khẩu</label>
+                    <input type="password" id="password" placeholder="Mật khẩu" required
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-blue transition">
+                </div>
+                <button type="submit"
+                        class="w-full btn-orange text-white font-semibold py-3 rounded-lg shadow-md transition-all duration-300 transform hover:scale-[1.01] hover:shadow-lg">
+                    Đăng nhập
+                </button>
+                <p id="login-message" class="text-red-500 text-center mt-4"></p>
+            </form>
+        </div>
+
+        <div id="contacts-container" class="bg-white p-8 rounded-xl shadow-lg border border-gray-200" style="display: none;">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-bold text-gray-800">Danh sách Liên hệ đã nhận</h2>
+                <button id="logout-button"
+                        class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
+                    Đăng xuất
+                </button>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table id="contacts-table" class="min-w-full rounded-lg overflow-hidden">
+                    <thead>
+                        <tr class="table-header-bg">
+                            <th class="py-3 px-4">ID</th>
+                            <th class="py-3 px-4">Tên</th>
+                            <th class="py-3 px-4">Email</th>
+                            <th class="py-3 px-4">Số điện thoại</th>
+                            <th class="py-3 px-4">Nội dung</th>
+                            <th class="py-3 px-4">Ngày tạo</th>
+                            <th class="py-3 px-4">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contacts-tbody" class="bg-white divide-y divide-gray-200"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 mt-auto">
+        <div class="container mx-auto text-center px-4">
+            <p>&copy; 2024 DACA.vn. Tất cả bản quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <!-- Các file JS chính -->
+    <script src="/frontend/js/admin_login.js"></script>
+    <script src="/frontend/js/admin_update.js"></script>
+    <script src="/frontend/js/admin_delete.js"></script>
+    <script src="/frontend/js/admin_table.js"></script>
+
+    <!-- ✅ Script khởi tạo khi load trang admin -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const token = localStorage.getItem("accessToken");
+
+        if (token) {
+            // Đã đăng nhập: ẩn login, hiện quản trị
+            document.getElementById("login-container").style.display = "none";
+            document.getElementById("contacts-container").style.display = "block";
+
+            // Bắt đầu bộ đếm thời gian hết hạn token
+            if (typeof setTokenExpiration === "function") {
+                setTokenExpiration();
+            }
+
+            // Tự động tải danh sách contacts (với delay để chắc chắn scripts được tải)
+            setTimeout(() => {
+                if (typeof loadContacts === "function") {
+                    loadContacts();
+                }
+            }, 100);
+        } else {
+            // Chưa đăng nhập: hiện form login
+            document.getElementById("login-container").style.display = "block";
+            document.getElementById("contacts-container").style.display = "none";
+        }
+    });
+    </script>
+</body>
+</html>

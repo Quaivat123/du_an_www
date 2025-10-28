@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime
-from datetime import datetime
+from datetime import datetime, UTC
 from backend.backend_app.database import Base
 
 class Product(Base):
@@ -11,4 +11,4 @@ class Product(Base):
     description = Column(Text, nullable=True)
     image_url = Column(String(255), nullable=True)
     category = Column(String(100), nullable=True)  # ví dụ: "banhang", "doanhnghiep"
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.now(UTC))

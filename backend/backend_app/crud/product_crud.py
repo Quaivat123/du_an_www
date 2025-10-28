@@ -3,7 +3,7 @@ from backend.backend_app.models.product import Product
 from backend.backend_app.schemas.product_schema import ProductCreate
 
 def create_product(db: Session, product_in: ProductCreate):
-    product = Product(**product_in.dict())
+    product = Product(**product_in.model_dump())
     db.add(product)
     db.commit()
     db.refresh(product)
