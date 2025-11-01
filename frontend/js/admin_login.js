@@ -9,10 +9,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (loginForm) loginForm.addEventListener('submit', handleLogin);
     if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
+
+    // Kiểm tra token hết hạn khi load trang
+    checkTokenExpiration();
 });
+
+// === Check Token Expiration (dựa trên timestamp) ===
+function checkTokenExpiration() {
+    const token = localStorage.getItem('accessToken');
+    const loginTimestamp = localStorage.getItem('loginTimestamp');
+
+    if (!token || !loginTimestamp) return;
+
+    const currentTime = Date.now();
+    const elapsedTime = currentTime - parseInt(loginTimestamp);
+
+    // Nếu hết hạn, logout ngay
+    if (elapsedTime > TOKEN_EXPIRATION_TIME) {
+        alert('Phiên đăng nhập đã hết hạn! Vui lòng đăng nhập lại.');
+        handleLogout();
+        return;
+    }
+
+    // Nếu vẫn còn hạn, set timer cho thời gian còn lại
+    const remainingTime = TOKEN_EXPIRATION_TIME - elapsedTime;
+    if (tokenTimeoutId) clearTimeout(tokenTimeoutId);
+    tokenTimeoutId = setTimeout(() => {
+        alert('Phiên đăng nhập đã hết hạn! Vui lòng đăng nhập lại.');
+        handleLogout();
+    }, remainingTime);
+}
 
 // === Set Token Expiration Timer ===
 function setTokenExpiration() {
+    // Lưu timestamp lúc đăng nhập (chỉ lưu lần đầu)
+    if (!localStorage.getItem('loginTimestamp')) {
+        localStorage.setItem('loginTimestamp', Date.now().toString());
+    }
+
     // Xóa timer cũ nếu có
     if (tokenTimeoutId) clearTimeout(tokenTimeoutId);
 
@@ -73,6 +107,7 @@ function handleLogout() {
     if (tokenTimeoutId) clearTimeout(tokenTimeoutId);
 
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('loginTimestamp');
     showLoginUI();
 }
 
